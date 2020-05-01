@@ -5,6 +5,9 @@
     <title>Emotional Barometer</title>
     
     <style type="text/css">
+    body{
+        background: #C2CBD0
+    }
     text{
         font-family:Helvetica, Arial, sans-serif;
         font-size:25px;
@@ -67,28 +70,27 @@
             color = d3.scale.category20();//category20c()
             //randomNumbers = getRandomNumbers();
 
-
         var data = [
-                    {"label":"Happy",  "value":1,  "question":"Happy"},
-                    {"label":"Awed", "value":1, "question":"Awed"},
-                    {"label":"Nostalgic", "value":1, "question":"Nostalgic"},
-                    {"label":"Anxious ", "value":1, "question":"Anxious"},
-                    {"label":"Loving", "value":1, "question":"Loving"},
-                    {"label":"Dreamy", "value":1, "question":"Dreamy"},
-                    {"label":"Confident", "value":1, "question":"Confident"},
-                    {"label":"Guilty", "value":1, "question":"Guilty"},
-                    {"label":"Sulky", "value":1, "question":"Sulky"},
-                    {"label":"Greatful", "value":1, "question":"Greatful"},
-                    {"label":"Envious", "value":1, "question":"Envious"},
-                    {"label":"Solitary", "value":1, "question":"Solitary"},
-                    {"label":"Obsessed", "value":1, "question":"Obsessed"},
-                    {"label":"Ugly", "value":1, "question":"Ugly"},
-                    {"label":"Practical", "value":1, "question":"Practical"},
-                    {"label":"Weepy", "value":1, "question":"Weepy"},
-                    {"label":"Sensual", "value":1, "question":"Sensual"},
-                    {"label":"Melancholy", "value":1, "question":"Melancholy"},
-                    {"label":"Self-pitying", "value":1, "question":"Self-pitying"},
-                    {"label":"Needy", "value":1, "question":"Needy"}
+                    {"label":"SELF-PITYING", "value":1, "question":"Self-pitying"},
+                    {"label":"NEEDY", "value":1, "question":"Needy"},
+                    {"label":"HAPPY",  "value":1,  "question":"Happy"},
+                    {"label":"AWED", "value":1, "question":"Awed"},
+                    {"label":"NOSTALGIC", "value":1, "question":"Nostalgic"},
+                    {"label":"ANXIOUS ", "value":1, "question":"Anxious"},
+                    {"label":"LOVING", "value":1, "question":"Loving"},
+                    {"label":"DREAMY", "value":1, "question":"Dreamy"},
+                    {"label":"CONFIDENT", "value":1, "question":"Confident"},
+                    {"label":"GUILTY", "value":1, "question":"Guilty"},
+                    {"label":"SULKY", "value":1, "question":"Sulky"},
+                    {"label":"GREATFUL", "value":1, "question":"Greatful"},
+                    {"label":"ENVIOUS", "value":1, "question":"Envious"},
+                    {"label":"SOLITARY", "value":1, "question":"Solitary"},
+                    {"label":"OBSESSED", "value":1, "question":"Obsessed"},
+                    {"label":"UGLY", "value":1, "question":"Ugly"},
+                    {"label":"PRACTICAL", "value":1, "question":"Practical"},
+                    {"label":"WEEPY", "value":1, "question":"Weepy"},
+                    {"label":"SENSUAL", "value":1, "question":"Sensual"},
+                    {"label":"MELANCHOLY", "value":1, "question":"Melancholy"}
         ];
 
 
@@ -127,65 +129,65 @@
                 d.innerRadius = 0;
                 d.outerRadius = r;
                 d.angle = (d.startAngle + d.endAngle)/2;
-                return "rotate(" + (d.angle * 180 / Math.PI - 90) + ")translate(" + (d.outerRadius -10) +")";
+                return "rotate(" + (d.angle * 180 / Math.PI - 88) + ")translate(" + (d.outerRadius -25) +")";
             })
             .attr("text-anchor", "end")
             .text( function(d, i) {
                 return data[i].label;
             });
 
-        container.on("click", spin);
+        // container.on("click", spin);
 
 
-        function spin(d){
+        // function spin(d){
             
-            container.on("click", null);
+        //     container.on("click", null);
 
-            //all slices have been seen, all done
-            console.log("OldPick: " + oldpick.length, "Data length: " + data.length);
-            if(oldpick.length == data.length){
-                console.log("done");
-                container.on("click", null);
-                return;
-            }
+        //     //all slices have been seen, all done
+        //     console.log("OldPick: " + oldpick.length, "Data length: " + data.length);
+        //     if(oldpick.length == data.length){
+        //         console.log("done");
+        //         container.on("click", null);
+        //         return;
+        //     }
 
-            var  ps       = 360/data.length,
-                 pieslice = Math.round(1440/data.length),
-                 rng      = Math.floor((Math.random() * 1440) + 360);
+        //     var  ps       = 360/data.length,
+        //          pieslice = Math.round(1440/data.length),
+        //          rng      = Math.floor((Math.random() * 1440) + 360);
                 
-            rotation = (Math.round(rng / ps) * ps);
+        //     rotation = (Math.round(rng / ps) * ps);
             
-            picked = Math.round(data.length - (rotation % 360)/ps);
-            picked = picked >= data.length ? (picked % data.length) : picked;
+        //     picked = Math.round(data.length - (rotation % 360)/ps);
+        //     picked = picked >= data.length ? (picked % data.length) : picked;
 
 
-            if(oldpick.indexOf(picked) !== -1){
-                d3.select(this).call(spin);
-                return;
-            } else {
-                oldpick.push(picked);
-            }
+        //     if(oldpick.indexOf(picked) !== -1){
+        //         d3.select(this).call(spin);
+        //         return;
+        //     } else {
+        //         oldpick.push(picked);
+        //     }
 
-            rotation += 90 - Math.round(ps/2);
+        //     rotation += 90 - Math.round(ps/2);
 
-            vis.transition()
-                .duration(3000)
-                .attrTween("transform", rotTween)
-                .each("end", function(){
+        //     vis.transition()
+        //         .duration(3000)
+        //         .attrTween("transform", rotTween)
+        //         .each("end", function(){
 
-                    //mark question as seen
-                    d3.select(".slice:nth-child(" + (picked + 1) + ") path")
-                        .attr("fill", "#111");
+        //             //mark question as seen
+        //             d3.select(".slice:nth-child(" + (picked + 1) + ") path")
+        //                 .attr("fill", "#111");
 
-                    //populate question
-                    d3.select("#question h1")
-                        .text(data[picked].question);
+        //             //populate question
+        //             d3.select("#question h1")
+        //                 .text(data[picked].question);
 
-                    oldrotation = rotation;
+        //             oldrotation = rotation;
                 
-                    container.on("click", spin);
-                });
-        }
+        //             container.on("click", spin);
+        //         });
+        // }
 
         //make arrow
         svg.append("g")
@@ -218,22 +220,42 @@
         }
         
         
-        function getRandomNumbers(){
-            var array = new Uint16Array(1000);
-            var scale = d3.scale.linear().range([360, 1440]).domain([0, 100000]);
+        // function getRandomNumbers(){
+        //     var array = new Uint16Array(1000);
+        //     var scale = d3.scale.linear().range([360, 1440]).domain([0, 100000]);
 
-            if(window.hasOwnProperty("crypto") && typeof window.crypto.getRandomValues === "function"){
-                window.crypto.getRandomValues(array);
-                console.log("works");
-            } else {
-                //no support for crypto, get crappy random numbers
-                for(var i=0; i < 1000; i++){
-                    array[i] = Math.floor(Math.random() * 100000) + 1;
-                }
-            }
+        //     if(window.hasOwnProperty("crypto") && typeof window.crypto.getRandomValues === "function"){
+        //         window.crypto.getRandomValues(array);
+        //         console.log("works");
+        //     } else {
+        //         //no support for crypto, get crappy random numbers
+        //         for(var i=0; i < 1000; i++){
+        //             array[i] = Math.floor(Math.random() * 100000) + 1;
+        //         }
+        //     }
 
-            return array;
-        }
+        //     return array;
+        // }
+
+         var interval = null;
+         var isDown = false;
+         var lastX = w / 2;
+         var lastY = h / 2;
+         var curAngle = 0;
+         svg.on("mousedown", function(d) {
+           isDown = true;
+         });
+         svg.on("mousemove", function(d) {
+           if (isDown) {
+             var thisX = d3.event.x - lastX,
+               thisY = d3.event.y - lastY;
+             var angleDeg = Math.atan2(lastX - d3.event.y, lastY - d3.event.x) * 180 / Math.PI;
+             svg.attr("transform", "translate(" + w / 2 + "," + h / 2 + ") rotate(" + angleDeg + "," + 0 + "," + 0 + ")");
+           }
+         });
+         svg.on("mouseup", function(d) {
+           isDown = false;
+         });
 
     </script>
 </body>
