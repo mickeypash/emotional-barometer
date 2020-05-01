@@ -57,7 +57,8 @@
     <p>purchase the book from the <a href="https://www.theschooloflife.com/shop/emotional-barometer/">School of Life</a></p>
     <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
     <script type="text/javascript" charset="utf-8">
-        var padding = {top:20, right:10, bottom:0, left:0},
+        "use strict";
+        let padding = {top:20, right:10, bottom:0, left:0},
             w = 800 - padding.left - padding.right,
             h = 800 - padding.top  - padding.bottom,
             r = Math.min(w, h)/2,
@@ -65,11 +66,9 @@
             oldrotation = 0,
             picked = 100000,
             oldpick = [],
-            color = d3.scale.category20();//category20c()
-            //randomNumbers = getRandomNumbers();
+            color = d3.scale.category20();
 
-
-        var data = [
+        let data = [
                     {"label":"Happy",  "value":1,  "question":"Happy"},
                     {"label":"Awed", "value":1, "question":"Awed"},
                     {"label":"Nostalgic", "value":1, "question":"Nostalgic"},
@@ -93,26 +92,26 @@
         ];
 
 
-        var svg = d3.select('#chart')
+        let svg = d3.select('#chart')
             .append("svg")
             .data([data])
             .attr("width",  w + padding.left + padding.right)
             .attr("height", h + padding.top + padding.bottom);
 
-        var container = svg.append("g")
+        let container = svg.append("g")
             .attr("class", "chartholder")
             .attr("transform", "translate(" + (w/2 + padding.left) + "," + (h/2 + padding.top) + ")");
 
-        var vis = container
+        let vis = container
             .append("g");
             
-        var pie = d3.layout.pie().sort(null).value(function(d){return 1;});
+        let pie = d3.layout.pie().sort(null).value(function(d){return 1;});
 
         // declare an arc generator function
-        var arc = d3.svg.arc().outerRadius(r);
+        let arc = d3.svg.arc().outerRadius(r);
 
         // select paths, use arc generator to draw
-        var arcs = vis.selectAll("g.slice")
+        let arcs = vis.selectAll("g.slice")
             .data(pie)
             .enter()
             .append("g")
@@ -212,7 +211,7 @@
         
         
         function rotTween(to) {
-          var i = d3.interpolate(oldrotation % 360, rotation);
+          let i = d3.interpolate(oldrotation % 360, rotation);
           return function(t) {
             return "rotate(" + i(t) + ")";
           };
@@ -220,15 +219,15 @@
         
         
         function getRandomNumbers(){
-            var array = new Uint16Array(1000);
-            var scale = d3.scale.linear().range([360, 1440]).domain([0, 100000]);
+            let array = new Uint16Array(1000);
+            let scale = d3.scale.linear().range([360, 1440]).domain([0, 100000]);
 
             if(window.hasOwnProperty("crypto") && typeof window.crypto.getRandomValues === "function"){
                 window.crypto.getRandomValues(array);
                 console.log("works");
             } else {
                 //no support for crypto, get crappy random numbers
-                for(var i=0; i < 1000; i++){
+                for(let i=0; i < 1000; i++){
                     array[i] = Math.floor(Math.random() * 100000) + 1;
                 }
             }
