@@ -17,5 +17,6 @@ I wanted to capture this notion in online form. The idea is simple:
 - Each emotion should have a perm link such as `http://emotional.bar/nostalgia`
 - This way people can share their emotions with their friends, family and even colleagues
 
-** Resources **
+### Resources
 - [Sample PDF with emotions explained](https://www.theschooloflife.com/assets/Emotional-Barometer.pdf)
+- [wheelnavjs](http://wheelnavjs.softwaretailoring.net/documentation/core.html)
